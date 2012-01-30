@@ -65,7 +65,6 @@ public class Uploader {
 
 	final static String TOKEN_FILE = ".flickr-token";
 	final static String CONFIG_FILE = ".flickr-uploader";
-	final static String home = System.getProperty("user.home");
 
 	/**
 	 * Main entry point for the Flickrj API
@@ -88,7 +87,7 @@ public class Uploader {
             options.addOption("ns", false, "no save token");
             options.addOption("h", false, "help");
 
-            System.out.println("HOME: "+ home + "\n");
+            System.out.println("HOME: "+ System.getProperty("user.home") + "\n");
 
             CommandLineParser parser = new PosixParser();
             CommandLine cmd = parser.parse(options, args);
@@ -328,7 +327,7 @@ public class Uploader {
     }
 
     private boolean saveToken(String token) {
-        File f = new File(home, Uploader.TOKEN_FILE);
+        File f = new File(System.getProperty("user.home"), Uploader.TOKEN_FILE);
         try {
        		f.createNewFile();
             if (f.exists()) {
@@ -352,7 +351,7 @@ public class Uploader {
      * @return
      */
     private String readToken() {
-        File f = new File(home, Uploader.TOKEN_FILE);
+        File f = new File(System.getProperty("user.home"), Uploader.TOKEN_FILE);
         if(f.exists()) {
             System.out.println("Reading token from \""+f.getAbsolutePath()+"\"");
             try {
